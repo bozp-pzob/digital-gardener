@@ -12,7 +12,7 @@ metadata:
       bins:
         - curl
     emoji: "\U0001F331"
-    homepage: https://digitalgardener.com
+    homepage: https://digitalgardener.io
 ---
 
 # Digital Gardener
@@ -22,7 +22,7 @@ Digital Gardener is a community intelligence platform that aggregates, enriches,
 ## Base URL
 
 ```
-https://digitalgardener.com/api/v1
+https://digitalgardener.io/api/v1
 ```
 
 All endpoints below are relative to this base URL.
@@ -36,7 +36,7 @@ These endpoints require no authentication or payment.
 ### List available communities
 
 ```bash
-curl https://digitalgardener.com/api/v1/configs
+curl https://digitalgardener.io/api/v1/configs
 ```
 
 Returns all public communities with their IDs, names, slugs, and descriptions. Use the `id` or `slug` from the response to query specific communities.
@@ -45,19 +45,19 @@ Returns all public communities with their IDs, names, slugs, and descriptions. U
 
 ```bash
 # Search for a specific community
-curl "https://digitalgardener.com/api/v1/configs?search=eliza&limit=5"
+curl "https://digitalgardener.io/api/v1/configs?search=eliza&limit=5"
 ```
 
 ### Featured communities
 
 ```bash
-curl https://digitalgardener.com/api/v1/configs/featured
+curl https://digitalgardener.io/api/v1/configs/featured
 ```
 
 ### Get community details
 
 ```bash
-curl https://digitalgardener.com/api/v1/configs/{configId}
+curl https://digitalgardener.io/api/v1/configs/{configId}
 ```
 
 Returns metadata including name, description, sources, data date range, and monetization status.
@@ -65,7 +65,7 @@ Returns metadata including name, description, sources, data date range, and mone
 ### Get trending topics
 
 ```bash
-curl https://digitalgardener.com/api/v1/configs/{configId}/topics
+curl https://digitalgardener.io/api/v1/configs/{configId}/topics
 ```
 
 Returns topic keywords with frequency counts. Useful for understanding what a community is currently discussing.
@@ -75,7 +75,7 @@ Returns topic keywords with frequency counts. Useful for understanding what a co
 ### Get statistics
 
 ```bash
-curl https://digitalgardener.com/api/v1/configs/{configId}/stats
+curl https://digitalgardener.io/api/v1/configs/{configId}/stats
 ```
 
 Returns total content items, date range coverage, active sources, and contributor counts.
@@ -83,7 +83,7 @@ Returns total content items, date range coverage, active sources, and contributo
 ### Health check
 
 ```bash
-curl https://digitalgardener.com/api/v1/health
+curl https://digitalgardener.io/api/v1/health
 ```
 
 ---
@@ -99,7 +99,7 @@ Rich data endpoints -- context, summaries, raw items, and semantic search -- use
 **Step 1: Request the data**
 
 ```bash
-curl -i https://digitalgardener.com/api/v1/configs/{configId}/context
+curl -i https://digitalgardener.io/api/v1/configs/{configId}/context
 ```
 
 If the community requires payment, you receive an HTTP 402 response:
@@ -144,7 +144,7 @@ Send the exact `amount` of USDC to the `recipient` wallet address. Include the `
 **Step 3: Retry with payment proof**
 
 ```bash
-curl https://digitalgardener.com/api/v1/configs/{configId}/context \
+curl https://digitalgardener.io/api/v1/configs/{configId}/context \
   -H 'X-Payment-Proof: {"signature":"<solana_tx_signature>","memo":"ctx:<configId>:<timestamp>:<random>"}'
 ```
 
@@ -156,15 +156,15 @@ Instead of paying per query, you can purchase 24 hours of unlimited access to a 
 
 ```bash
 # Step 1: Check access status
-curl https://digitalgardener.com/api/v1/configs/{configId}/access
+curl https://digitalgardener.io/api/v1/configs/{configId}/access
 
 # Step 2: Initiate purchase (returns 402 with payment details)
-curl -X POST https://digitalgardener.com/api/v1/configs/{configId}/access/purchase \
+curl -X POST https://digitalgardener.io/api/v1/configs/{configId}/access/purchase \
   -H 'Content-Type: application/json' \
   -d '{"walletAddress": "<your_solana_wallet>"}'
 
 # Step 3: Complete purchase with payment proof
-curl -X POST https://digitalgardener.com/api/v1/configs/{configId}/access/purchase \
+curl -X POST https://digitalgardener.io/api/v1/configs/{configId}/access/purchase \
   -H 'Content-Type: application/json' \
   -H 'X-Payment-Proof: {"signature":"<tx_sig>","memo":"access:<configId>:<timestamp>:<random>"}' \
   -d '{"walletAddress": "<your_solana_wallet>"}'
@@ -182,16 +182,16 @@ Best endpoint for feeding community intelligence into an LLM context window.
 
 ```bash
 # JSON format (structured)
-curl https://digitalgardener.com/api/v1/configs/{configId}/context
+curl https://digitalgardener.io/api/v1/configs/{configId}/context
 
 # Plain text format (optimized for LLM context windows)
-curl "https://digitalgardener.com/api/v1/configs/{configId}/context?format=text"
+curl "https://digitalgardener.io/api/v1/configs/{configId}/context?format=text"
 
 # For a specific date
-curl "https://digitalgardener.com/api/v1/configs/{configId}/context?date=2026-02-28&format=text"
+curl "https://digitalgardener.io/api/v1/configs/{configId}/context?date=2026-02-28&format=text"
 
 # Limit output length (in characters)
-curl "https://digitalgardener.com/api/v1/configs/{configId}/context?format=text&maxLength=8000"
+curl "https://digitalgardener.io/api/v1/configs/{configId}/context?format=text&maxLength=8000"
 ```
 
 **Query parameters:** `format` (json, text), `date` (YYYY-MM-DD), `maxLength`
@@ -199,10 +199,10 @@ curl "https://digitalgardener.com/api/v1/configs/{configId}/context?format=text&
 ### Get AI-generated summary
 
 ```bash
-curl https://digitalgardener.com/api/v1/configs/{configId}/summary
+curl https://digitalgardener.io/api/v1/configs/{configId}/summary
 
 # For a specific date
-curl "https://digitalgardener.com/api/v1/configs/{configId}/summary?date=2026-02-28"
+curl "https://digitalgardener.io/api/v1/configs/{configId}/summary?date=2026-02-28"
 ```
 
 Returns the AI-generated daily summary including highlights, key discussions, and notable events.
@@ -210,7 +210,7 @@ Returns the AI-generated daily summary including highlights, key discussions, an
 ### Get raw content items
 
 ```bash
-curl "https://digitalgardener.com/api/v1/configs/{configId}/items?limit=50"
+curl "https://digitalgardener.io/api/v1/configs/{configId}/items?limit=50"
 ```
 
 Returns individual content items (messages, PRs, issues, commits) from the community's sources.
@@ -220,7 +220,7 @@ Returns individual content items (messages, PRs, issues, commits) from the commu
 ### Get generated summaries list
 
 ```bash
-curl "https://digitalgardener.com/api/v1/configs/{configId}/content?limit=10"
+curl "https://digitalgardener.io/api/v1/configs/{configId}/content?limit=10"
 ```
 
 Returns a paginated list of all generated summaries for a community.
@@ -236,7 +236,7 @@ Search across community content using natural language queries. Powered by vecto
 ### POST search (single community)
 
 ```bash
-curl -X POST https://digitalgardener.com/api/v1/search \
+curl -X POST https://digitalgardener.io/api/v1/search \
   -H 'Content-Type: application/json' \
   -d '{
     "configId": "<configId>",
@@ -250,13 +250,13 @@ curl -X POST https://digitalgardener.com/api/v1/search \
 ### GET search (single community)
 
 ```bash
-curl "https://digitalgardener.com/api/v1/search/{configId}?q=token+launch&limit=10&after=2026-02-01"
+curl "https://digitalgardener.io/api/v1/search/{configId}?q=token+launch&limit=10&after=2026-02-01"
 ```
 
 ### Multi-community search
 
 ```bash
-curl -X POST https://digitalgardener.com/api/v1/search/multi \
+curl -X POST https://digitalgardener.io/api/v1/search/multi \
   -H 'Content-Type: application/json' \
   -d '{
     "configIds": ["<configId1>", "<configId2>"],
@@ -304,12 +304,12 @@ curl -X POST https://digitalgardener.com/api/v1/search/multi \
 A machine-readable OpenAPI 3.1 specification is available at:
 
 ```
-https://digitalgardener.com/api/v1/openapi.json
+https://digitalgardener.io/api/v1/openapi.json
 ```
 
 ## Agent Discovery
 
 Standard discovery files are served at:
 
-- `https://digitalgardener.com/.well-known/ai-plugin.json` -- Agent plugin manifest
-- `https://digitalgardener.com/robots.txt` -- Crawling rules
+- `https://digitalgardener.io/.well-known/ai-plugin.json` -- Agent plugin manifest
+- `https://digitalgardener.io/robots.txt` -- Crawling rules
